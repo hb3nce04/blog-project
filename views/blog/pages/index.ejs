@@ -1,0 +1,70 @@
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mb-5 mb-lg-0">
+        <% if (posts.length === 0) { %>
+         <h4>There are no posts :(</h4>
+        <% } else { %>
+          <% posts.forEach(post => { %>
+            <article class="row mb-5">
+              <div class="col-12">
+                <div class="post-slider">
+                  <img
+                    loading="lazy"
+                    src="images/post/post-6.jpg"
+                    class="img-fluid"
+                    alt="post-thumb"
+                  />
+                  <img
+                    loading="lazy"
+                    src="images/post/post-1.jpg"
+                    class="img-fluid"
+                    alt="post-thumb"
+                  />
+                  <img
+                    loading="lazy"
+                    src="images/post/post-3.jpg"
+                    class="img-fluid"
+                    alt="post-thumb"
+                  />
+                </div>
+              </div>
+              <div class="col-12 mx-auto">
+                <h3>
+                  <a class="post-title" href='/post/<%= post.id %>'
+                    ><%= post.title %></a
+                  >
+                </h3>
+                <ul class="list-inline post-meta mb-4">
+                  <li class="list-inline-item">
+                    <i class="ti-user mr-2"></i>
+                    <a href="/?author=<%= post.author.name.replace(" " ,"+") %>"><%= post.author.name %></a>
+                  </li>
+                  <li class="list-inline-item font-weight-bold"><%= new Date(post.createdAt).toLocaleDateString('en-GB') %></li>
+                  <li class="list-inline-item">
+                    Category : <a href="/?category=<%= post.category.name.replace(" " ,"+") %>" class="ml-1"><%= post.category.name %></a>
+                  </li>
+                  <li class="list-inline-item">
+                    Tags :
+                      <% post.tags.forEach(tag => { %>
+                        <a href="/?tag=<%= tag.name.replace(" " ,"+") %>" class="ml-1"><%= tag.name %></a>
+                      <% }) %>
+                  </li>
+                </ul>
+                <p>
+                  <%= post.body.split("</p>")[0].replace(/<[^>]*>?/gm, '') %>
+                </p>
+                <a href='/post/<%= post.id %>' class="btn btn-outline-primary"
+                  >Continue Reading</a
+                >
+              </div>
+            </article>
+            <% }) %>
+        <% } %>
+         
+        
+      </div>
+      <!-- <aside class="col-lg-4">sidebarplace</aside> -->
+    </div>
+  </div>
+</section>
